@@ -1,0 +1,4 @@
+ConfigParser
+datetime
+python-binance
+python-telegram-bot

@@ -1,0 +1,11 @@
+[BINANCE]
+key = 
+secret = 
+[TELEGRAM]
+token = 
+chat_id = 
+[GENERAL]
+refresh_rate = 1
+advanced_info = True
+update_create = True
+update_closed = True
