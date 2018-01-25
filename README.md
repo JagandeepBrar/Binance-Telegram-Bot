@@ -27,7 +27,7 @@ For a deeper installation guide (including creating a Telegram bot): https://www
 # Notes
 
 - If enabled, a message will be sent even if you closed the buy/sell order yourself
-- A notification will not be sent if a buy/sell order goes through before the script has refreshed
+- A notification will not be sent if a buy/sell order is created and completed both before the script has refreshed
 - Currently it is purely server-sided with no callback support
 	- This *may* get added in the future for additional features
 	
