@@ -30,3 +30,8 @@ For a deeper installation guide (including creating a Telegram bot):
 - A notification will not be sent if a buy/sell order goes through before the script has refreshed
 - Currently it is purely server-sided with no callback support
 	- This *may* get added in the future for additional features
+	
+# APIs Used
+
+- [Python-Binance](https://github.com/sammchardy/python-binance
+- [Python-Telegram-Bot](https://github.com/python-telegram-bot/python-telegram-bot)
