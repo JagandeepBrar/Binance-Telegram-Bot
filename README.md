@@ -8,7 +8,7 @@ Written for Python 3.6.4.
 - `pip install -r requirements`
 - `python start.py`
 
-For a deeper installation guide (including creating a Telegram bot): 
+For a deeper installation guide (including creating a Telegram bot): https://www.jagandeepbrar.io/binance-telegram-bot-guide/
 
 # Config
 
