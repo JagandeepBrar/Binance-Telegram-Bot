@@ -35,3 +35,10 @@ For a deeper installation guide (including creating a Telegram bot):
 
 - [Python-Binance](https://github.com/sammchardy/python-binance)
 - [Python-Telegram-Bot](https://github.com/python-telegram-bot/python-telegram-bot)
+
+# Donation
+
+No donation or anything is needed at all, but if you found the bot useful, I'll shamelessly leave a few of my addresses below:
+- **BTC**: 3JcxCYrVtQpRWfnocjn544RC6qpt1MDsAq
+- **BCH**: 1CRroNdidp4oGfiBpb63H7Feq8ou4TJY8M
+- **ETH**: 0x6bdddb6f91cbdc5198bc9fed6f1f8f5686fd3a7e
