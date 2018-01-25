@@ -45,8 +45,10 @@ def initConfig():
 	config.read("config.ini")
 	#Raise an error if it cannot import the configuration datasets
 	if('GENERAL' in config):
-		global refresh_rate
+		global refresh_rate, send_open, send_closed
 		refresh_rate = config['GENERAL']['refresh_rate']
+		send_open = config['GENERAL'].getboolean('update_open')
+		send_closed = config['GENERAL'].getboolean('update_closed')
 	else:
 		raise ValueError("Cannot find the 'General' dataset in your config file.")
 
@@ -100,7 +102,7 @@ def addOrder(order):
 	global orders
 	orders.append(order)
 	#Send a message to Telegram if enabled in the config
-	if(config['GENERAL'].getboolean('update_open')):
+	if(send_open):
 		msg = "*{} Order Created*\n\n*Symbol*: {}\n*Price*: {}\n*Quantity*: {}".format(order.get("side").capitalize(), order.get("symbol"), order.get("price"), order.get("origQty"))
 		telegram_bot.send_message(chat_id=chat_id, text=msg, parse_mode=telegram.ParseMode.MARKDOWN)
 
@@ -109,7 +111,7 @@ def closeOrder(order):
 	global orders
 	orders.remove(order)
 	#Send a message to Telegram if enabled in the config
-	if(config['GENERAL'].getboolean('update_closed')):
+	if(send_closed):
 		msg = "*{} Order Closed*\n\n*Symbol*: {}\n*Price*: {}\n*Quantity*: {}".format(order.get("side").capitalize(), order.get("symbol"), order.get("price"), order.get("origQty"))
 		telegram_bot.send_message(chat_id=chat_id, text=msg, parse_mode=telegram.ParseMode.MARKDOWN)
 
