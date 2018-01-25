@@ -36,7 +36,7 @@ def init():
 	initBinance()
 	#Print and send success messages
 	print("\nBot started successfully... Beginning processing...\n")
-	telegram_bot.send_message(chat_id=chat_id, text=("Your bot instance (Started at " + time_started + ") has started. Monitoring has begun."))
+	telegram_bot.send_message(chat_id=chat_id, text=("Your bot instance (" + time_started + ") has started. Monitoring has begun."))
 
 def initConfig():
 	#Initialize the config file
@@ -117,7 +117,7 @@ def closeOrder(order):
 @atexit.register
 def exit():
 	#Send an "exiting bot" message before exiting script
-	telegram_bot.send_message(chat_id=chat_id, text=("Your bot instance (Started at " + time_started + ") has exited. Monitoring has stopped."))
+	telegram_bot.send_message(chat_id=chat_id, text=("Your bot instance (" + time_started + ") has exited. Monitoring has stopped."))
 	print("Bot has exited successfully...")
 
 if(__name__ == "__main__"):
