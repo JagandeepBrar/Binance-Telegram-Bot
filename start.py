@@ -10,11 +10,16 @@ from datetime import datetime
 config = None
 telegram_bot = None
 binance_bot = None
-#general variables
+
+#General variables
 refresh_rate = -1
 chat_id = -1
 time_started = -1
+
+#Order-related variables
 orders = []
+send_open = False
+send_closed = False
 
 def start():
 	init()
@@ -31,7 +36,7 @@ def init():
 	initBinance()
 	#Print and send success messages
 	print("\nBot started successfully... Beginning processing...\n")
-	telegram_bot.send_message(chat_id=chat_id, text=("Your bot instance (Started at " + time_started + ") has started. Monitoring has started."))
+	telegram_bot.send_message(chat_id=chat_id, text=("Your bot instance (Started at " + time_started + ") has started. Monitoring has begun."))
 
 def initConfig():
 	#Initialize the config file
@@ -76,33 +81,43 @@ def initBinance():
 		raise ValueError("Cannot find the 'Binance' dataset in your config file.")
 
 def process():
-	global orders
 	while(1):
 		#Fetches all open orders
-		open_orders = parseOrders()
+		open_orders = binance_bot.get_open_orders()
+		#Iterate through all orders fetched from Binance and append any new orders
+		for order in open_orders:
+			if not order in orders:
+				addOrder(order)
+		#Iterate through all orders in our own list and remove any orders not on Binance anymore
+		for order in orders:
+			if not order in open_orders:
+				closeOrder(order)
 		#Sleep for refresh_rate amount of seconds
 		time.sleep((int(refresh_rate)*60))
 
-def parseOrders():
-	#Fetch open orders from Binance and create an empty list to hold the parsed orders
-	open_orders = binance_bot.get_open_orders()
-	parsed = []
-	for order in open_orders:
-		#Append a new item to the parsed list that stores the symbol and orderID delimited by a bar '|'
-		item = order.get("symbol") + "|" + order.get("clientOrderId")
-		parsed.append(item)
-	return parsed
-
 def addOrder(order):
-	pass
+	#Add the order to the global list
+	global orders
+	orders.append(order)
+	#Send a message to Telegram if enabled in the config
+	if(config['GENERAL'].getboolean('update_open')):
+		msg = "*{} Order Created*\n\n*Symbol*: {}\n*Price*: {}\n*Quantity*: {}".format(order.get("side").capitalize(), order.get("symbol"), order.get("price"), order.get("origQty"))
+		telegram_bot.send_message(chat_id=chat_id, text=msg, parse_mode=telegram.ParseMode.MARKDOWN)
 
-def removeOrder(order):
-	pass
+def closeOrder(order):
+	#Remove the order from the global list
+	global orders
+	orders.remove(order)
+	#Send a message to Telegram if enabled in the config
+	if(config['GENERAL'].getboolean('update_closed')):
+		msg = "*{} Order Closed*\n\n*Symbol*: {}\n*Price*: {}\n*Quantity*: {}".format(order.get("side").capitalize(), order.get("symbol"), order.get("price"), order.get("origQty"))
+		telegram_bot.send_message(chat_id=chat_id, text=msg, parse_mode=telegram.ParseMode.MARKDOWN)
+
 
 @atexit.register
 def exit():
 	#Send an "exiting bot" message before exiting script
-	telegram_bot.send_message(chat_id=chat_id, text=("Your bot instance (Started at " + time_started + ") has stopped. Monitoring has exited."))
+	telegram_bot.send_message(chat_id=chat_id, text=("Your bot instance (Started at " + time_started + ") has exited. Monitoring has stopped."))
 	print("Bot has exited successfully...")
 
 if(__name__ == "__main__"):
