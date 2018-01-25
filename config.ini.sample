@@ -1,9 +1,9 @@
 [BINANCE]
-key = 
-secret = 
+key = binance_api_key
+secret = binance_api_secret
 [TELEGRAM]
-token = 
-chat_id = 
+token = telegram_token
+chat_id = telegram_chat_id
 [GENERAL]
 refresh_rate = 1
 update_open = yes
