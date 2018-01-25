@@ -1,5 +1,5 @@
-# Binance-Telegram-Bot
-A basic Telegram bot that sends updates if a transaction has gone through on Binance. 
+# Binance-Telegram-Script
+A basic Telegram bot (script) that sends updates if a transaction has gone through on Binance. 
 Written for Python 3.6.4.
 
 # Usage
@@ -28,8 +28,6 @@ For a deeper installation guide (including creating a Telegram bot): https://www
 
 - If enabled, a message will be sent even if you closed the buy/sell order yourself
 - A notification will not be sent if a buy/sell order is created and completed both before the script has refreshed
-- Currently it is purely server-sided with no callback support
-	- This *may* get added in the future for additional features
 	
 # APIs Used
 
