@@ -1,4 +1,4 @@
-# Binance-Telegram-Script
+# Telegram-Binance-Script
 A basic Telegram bot (script) that sends updates if a transaction has gone through on Binance. 
 Written for Python 3.6.4.
 
