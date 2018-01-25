@@ -33,5 +33,5 @@ For a deeper installation guide (including creating a Telegram bot):
 	
 # APIs Used
 
-- [Python-Binance](https://github.com/sammchardy/python-binance
+- [Python-Binance](https://github.com/sammchardy/python-binance)
 - [Python-Telegram-Bot](https://github.com/python-telegram-bot/python-telegram-bot)
